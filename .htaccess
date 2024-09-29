@@ -5,5 +5,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Rewrite the URL to index.php and pass 'id' as a GET parameter
+RewriteCond %{REQUEST_METHOD} GET
 RewriteRule ^carne/?([0-9]*)$ index.php?id=$1 [QSA,L]
 
+# Match any URL that starts with /carne and optionally has anything after it
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^carne.*$ post_handler.php [QSA,L]
